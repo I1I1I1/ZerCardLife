@@ -1,0 +1,77 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/homelistpage/homelistpage",
+    "pages/home/home",
+    "pages/info/info",
+    "pages/grade/grade",
+    "pages/me/me",
+    "pages/startCard/startCard",
+    "pages/chongzhi_xuanka/chongzhi_xuanka1",
+    "pages/chongzhi_sousuo1/chongzhi_sousuo1",
+    "pages/chongzhi_jine/chongzhi_jine1",
+    "pages/kaika_success/kaika_success",
+    "pages/chongzhi_success/chongzhi_success"
+  ],
+  "subPackages": [
+    {
+      "root": "pagesA",
+      "pages": [
+        "order/order",
+        "orderList/orderList",
+        "consumptionDetails/consumptionDetails",
+        "settle/settle",
+        "settleSuccess/settleSuccess",
+        "kaika_sousuo1/kaika_sousuo1"
+      ]
+    },
+    {
+      "root": "pagesB",
+      "pages": [
+        "shopIncrease/shopIncrease",
+        "personnel_management/personnel_management",
+        "personnel_increase/personnel_increase",
+        "memberInfo/memberInfo",
+        "kakai_dengjixuanren/kakai_dengjixuanren"
+      ]
+    }
+  ],
+  "window": {
+    "navigationStyle": "custom"
+  },
+  "usingComponents": {},
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#ff7500",
+    "borderStyle": "black",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/homelistpage/homelistpage",
+        "iconPath": "static/tabbar/home-icon-sy-sel.png",
+        "selectedIconPath": "static/tabbar/home-icon-sy-sel.png",
+        "backgroundColor": "#DBF8FE",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/info/info",
+        "iconPath": "static/tabbar/home-icon-xiaoxi-nor.png",
+        "selectedIconPath": "static/tabbar/home-icon-xiaoxi-nor.png",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/grade/grade",
+        "iconPath": "static/tabbar/home-iconyeji-nor.png",
+        "selectedIconPath": "static/tabbar/home-iconyeji-nor.png",
+        "text": "业绩"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "iconPath": "static/tabbar/home-icon-me-nor.png",
+        "selectedIconPath": "static/tabbar/home-icon-me-nor.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap51.json"
+}

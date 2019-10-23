@@ -1,0 +1,2 @@
+<import src="./shopIncrease.vue.wxml" />
+    <template is="4f57be44" data="{{ ...$root['0'], $root }}"/>

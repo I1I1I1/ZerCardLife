@@ -1,0 +1,503 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/****导航****/
+.nav{
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		height: 55pt;
+		background: -webkit-gradient(linear,left top, right top,from(#F54D28),to(#FB9723));
+		background: -o-linear-gradient(left,#F54D28,#FB9723);
+		background: linear-gradient(to right,#F54D28,#FB9723);
+		-webkit-box-pack: center;
+		-webkit-justify-content: center;
+		    -ms-flex-pack: center;
+		        justify-content: center;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		    -ms-flex-align: center;
+		        align-items: center;
+		color: #fff;
+		font-weight: bolder;
+		padding-top: 32rpx;
+		-webkit-flex-wrap: nowrap;
+		    -ms-flex-wrap: nowrap;
+		        flex-wrap: nowrap;
+		padding-left: 25rpx;
+		width: 100%;
+}
+.nav-list{
+		-webkit-box-flex: 1;
+		-webkit-flex: 1;
+		    -ms-flex: 1;
+		        flex: 1;
+}
+.back{
+		position: relative;
+		top: 2rpx;
+}
+#life0{
+		position: relative;
+		left: 60rpx;
+}
+page {
+	background-color: #ffffff;
+}
+.shu {
+	color: #f54d28;
+	font-size: 35rpx;
+	font-weight: bolder;
+	padding-right: 10rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	padding-left: 4%;
+	padding-top: 4%;
+	font-weight: 1500;
+}
+.huiyuan {
+	padding-left: 2%;
+	color: black;
+}
+.xinxi {
+	position: relative;
+	top: 150rpx;
+	width: 80%;
+	height: 70%;
+	margin: 0 auto;
+	background-color: #ffffff;
+	border-radius: 8px;
+	padding-bottom: 10%;
+}
+.xinin_x {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	font-size: 30rpx;
+	padding-left: 10%;
+	padding-top: 5%;
+	font-weight: bold;
+}
+.xin_y1 {
+	padding-left: 10%;
+	position: relative;
+	top: 7rpx;
+	padding-bottom: 2%;
+	font-size: 30rpx; 
+	font-weight: normal;
+	color: #333333;
+}
+.xin_y2 {
+	padding-left: 10%;
+	position: relative;
+	top: -5rpx;
+	font-size: 25rpx; 
+	font-weight: normal;
+	color: #333333;
+}
+.xian {
+	background-color: #e5e5e5;
+	width: 100%;
+	height: 1rpx;
+	position: relative;
+	top: 10rpx;
+}
+.xian1 {
+	background-color: #e5e5e5;
+	width: 80%;
+	height: 1rpx;
+	position: relative;
+	left: 10%;
+	top: 4rpx;
+}
+	/* 阴影 */
+.yinying {
+	width: 100%;
+	height: 40rpx;
+	background-color: #f0f0f0;
+	position: relative;
+	top: 50rpx;
+}
+	/* 支付 */
+.shu1 {
+	color: #f54d28;
+	font-size: 35rpx;
+	font-weight: bolder;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	padding-left: 4%;
+	padding-top: 4%;
+	font-weight: 1500;
+	/* background-color: #000000; */
+}
+.zhifu {
+	position: relative;
+	top: 55rpx;
+	width: 90%;
+	height: 340rpx;
+	margin: 0 auto;
+	background-color: #ffffff;
+	padding-bottom: 10%;
+}
+.section{
+	height: 20rpx;
+	width: 20rpx;
+	float: right;
+	top: 50rpx;
+	position: relative;
+	right: 5rpx;
+}
+	/* 微信支付宝现金图标 */
+.zhifu_image {
+	height: 40rpx;
+	width: 40rpx;
+	margin-left: 10rpx;
+	margin-top: 30rpx;
+	position: relative;
+	top: 10rpx;
+}
+.zhifu_zf_zi{
+	padding-left: 20rpx;
+	line-height: 60rpx;
+}
+.zhifu_zf {
+	margin-left: 30rpx;
+	position: relative;
+	bottom: 10rpx;
+	width: 610rpx;
+}
+.bottom {
+	width: 100%;
+	height: 8%;
+	background-color: #ffffff;
+	position: fixed;
+	top: 92%;
+}
+.quxiao {
+	width: 30%;
+	height: 70rpx;
+	font-size: 28rpx;
+	position: relative;
+	text-align: center;
+	padding-top: 15rpx;
+	left: 10%;
+	background: #0081ff;
+	color: #ffffff;
+	border-radius: 8px;
+}
+.queding {
+	width: 30%;
+	height: 70rpx;
+	font-size: 28rpx;
+	position: relative;
+	text-align: center;
+	padding-top: 15rpx;
+	background: #f87d24;
+	color: #ffffff;
+	left: 60%;
+	bottom: 64%;
+	border-radius: 8px;
+}
+

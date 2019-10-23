@@ -1,0 +1,4 @@
+<import src="/components/uni-popup/uni-popup.vue.wxml" />
+
+<template name="M5aa8ec3a-default-5aa8ec3a-0"><view class="_view M5aa8ec3a"><image style="height: 445rpx;width: 445rpx;" src="{{zeroCardIcon}}" mode class="_image M5aa8ec3a"></image></view></template>
+

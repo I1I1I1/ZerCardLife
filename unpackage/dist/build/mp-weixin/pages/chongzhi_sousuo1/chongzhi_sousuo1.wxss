@@ -1,0 +1,149 @@
+
+.content1 {
+	height: 150rpx;
+}
+.chongzhi {
+	color: #ffffff;
+	font-size: 35rpx;
+	position: relative;
+	top: -220rpx;
+	left: 343rpx;
+}
+page {
+	background-color: #ffffff;
+}
+image{
+	width: 100%;
+	height: 100%;
+}
+/* 搜索框 */
+.search-ico,
+.search-ico-1 {
+	width: 40rpx;
+	height: 40rpx;
+}
+.search-text {
+	font-size: 14px;
+	background-color: #ffffff;
+	height: 60rpx;
+	width: 480rpx;
+	padding-left: 25rpx;
+}
+.search-block {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	padding-left: 60rpx;
+	position: relative;
+	top: -32rpx;
+}
+.search-ico-wapper {
+	background-color: #ffffff;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	padding: 0rpx 0rpx 0rpx 40rpx;
+	border-bottom-left-radius: 18px;
+	border-top-left-radius: 18px;
+}
+.search-ico-wapper1 {
+	background-color: #ffffff;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	padding: 0rpx 40rpx 0rpx 0rpx;
+	border-bottom-right-radius: 18px;
+	border-top-right-radius: 18px;
+}
+.shadow {
+	width: 638rpx;
+	height: 60rpx;
+	border-radius: 18px;
+	-webkit-box-shadow: 0 0 10px #e6e6e6;
+	box-shadow: 0 0 10px #e6e6e6;
+	position: relative;
+	top: -90rpx;
+	left: 60rpx;
+}
+.show{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	margin-left: 100rpx;
+	position: relative;
+	top: -100rpx;
+}
+.huiyuan_info{
+}
+.show_head{
+	font-size: 25rpx;
+	color: #999999;
+	margin-bottom: 20rpx;
+}
+.xian{
+	background: #EBEBEB;
+	width: 85%;
+	height: 1rpx;
+}
+.huiyuan_img{
+	height: 90rpx;
+	width: 90rpx;
+	margin-top: 30rpx;
+}
+.huiyuan_hanzi{
+	position: relative;
+	left: 120rpx;
+	top: -80rpx;
+}
+.blackground{
+	position: relative;
+	top: 100rpx;
+	left: -50rpx;
+	height: 650rpx;
+	width: 800rpx;
+}
+.phone{
+	margin-top: 10rpx;
+	font-size: 24rpx;
+	color: #AFAFAF;
+}
+.xian1{
+	background: #EBEBEB;
+	width: 85%;
+	height: 1rpx;
+	position: relative;
+	top: -40rpx;
+}
+

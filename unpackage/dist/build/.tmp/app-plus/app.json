@@ -1,0 +1,67 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/orderList/orderList",
+    "pages/home/home",
+    "pages/settle/settle",
+    "pages/consumptionDetails/consumptionDetails",
+    "pages/order/order",
+    "pages/index/index",
+    "pages/settleSuccess/settleSuccess",
+    "pages/info/info",
+    "pages/grade/grade",
+    "pages/me/me",
+    "pages/startCard/startCard",
+    "pages/chongzhi_xuanka/chongzhi_xuanka1",
+    "pages/chongzhi_sousuo1/chongzhi_sousuo1",
+    "pages/chongzhi_jine/chongzhi_jine1",
+    "pages/kaika_success/kaika_success",
+    "pages/chongzhi_success/chongzhi_success",
+    "pages/kakai_dengjixuanren/kakai_dengjixuanren"
+  ],
+  "window": {
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#ff7500",
+    "borderStyle": "black",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tabbar/home-icon-sy-sel.png",
+        "selectedIconPath": "static/tabbar/home-icon-sy-sel.png",
+        "backgroundColor": "#DBF8FE",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/info/info",
+        "iconPath": "static/tabbar/home-icon-xiaoxi-nor.png",
+        "selectedIconPath": "static/tabbar/home-icon-xiaoxi-nor.png",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/grade/grade",
+        "iconPath": "static/tabbar/home-iconyeji-nor.png",
+        "selectedIconPath": "static/tabbar/home-iconyeji-nor.png",
+        "text": "业绩"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "iconPath": "static/tabbar/home-icon-me-nor.png",
+        "selectedIconPath": "static/tabbar/home-icon-me-nor.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "nvueCompiler": "weex",
+  "renderer": "auto",
+  "splashscreen": {
+    "alwaysShowBeforeRender": true,
+    "autoclose": false
+  },
+  "appname": "zeroCardLife",
+  "compilerVersion": "2.2.2",
+  "usingComponents": {}
+}

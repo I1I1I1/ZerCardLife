@@ -1,0 +1,2 @@
+<import src="./kakai_dengjixuanren.vue.wxml" />
+    <template is="fab3754e" data="{{ ...$root['0'], $root }}"/>
