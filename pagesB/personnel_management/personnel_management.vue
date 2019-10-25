@@ -245,7 +245,7 @@ export default {
 		search(selectEmpInfo){
 			let _this = this;
 			 _this.huiyuan = _this.huiyuanget.filter(Val => {
-				if(Val.name.includes(_this.selectEmpInfo)){
+				if(Val.name.includes(_this.selectEmpInfo) || Val.number.includes(_this.selectEmpInfo)){
 					 _this.huiyuan.push(Val);
 					return  _this.huiyuan;
 				}

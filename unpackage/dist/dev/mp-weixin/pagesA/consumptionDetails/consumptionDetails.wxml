@@ -1,2 +1,2 @@
 <import src="./consumptionDetails.vue.wxml" />
-    <template is="e3c293aa" data="{{ ...$root['0'], $root }}"/>
+    <template is="5aa8ec3a" data="{{ ...$root['0'], $root }}"/>

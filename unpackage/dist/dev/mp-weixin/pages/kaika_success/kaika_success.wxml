@@ -1,2 +1,2 @@
 <import src="./kaika_success.vue.wxml" />
-    <template is="b3af0fdc" data="{{ ...$root['0'], $root }}"/>
+    <template is="2a5ac75a" data="{{ ...$root['0'], $root }}"/>
