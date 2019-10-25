@@ -88,29 +88,23 @@
 				}
 			}
 		},
-		onLoad() {
-			
-			let openidStorage = uni.getStorageSync('openid');
-			console.log("home_openid",openidStorage);
-			
-			   if (openidStorage) {
-					this.val = openidStorage;
-			   }
+		onLoad(e) {
 			let _this = this;
-			_this.openid = openidStorage;
+			_this.openid = e.openid;
+			_this.val = e.openid;
+			console.log("new_openid",_this.openid);
 			_this.fanhuiIcon = _this.httpUrl+'file/static/order/jiehznag-icon-fanhui.png';
 			_this.shopIcon = _this.httpUrl+'file/static/home/shopIcon.png';
 			_this.rightDirIcon = _this.httpUrl+'file/static/home/rightDir.png';
 		
 			uni.request({
-				url: _this.httpUrl+'v_employee_shopController/find.xsh?openid='+openidStorage,
+				url: _this.httpUrl+'v_employee_shopController/find.xsh?openid='+_this.openid,
 				method: 'GET',
 				//header: {'content-type': "application/x-www-form-urlencoded"},
 				data:{},
 				success(res) {
 					console.log("获取店铺信息",res);
-					if(res.data.message == "获取成功"){
-						
+					
 						_this.shoplists = [];
 						let obj = res.data.obj;
 						 for(let k in obj){
@@ -121,7 +115,11 @@
 								"shop_name":obj[k].shop_name,
 								"shop_address":obj[k].shop_address,
 								"emp_name":obj[k].emp_name,
-								"mi_pkid":obj[k].mi_pkid
+								"mi_pkid":obj[k].mi_pkid,
+								"emp_phone":obj[k].emp_phone,
+								"personImg":obj[k].remark1,
+								"idcardval":obj[k].remark2,
+								"datepos":obj[k].updated_date
 							})
 						} 
 						_this.createby = obj[0].mi_pkid;
@@ -136,22 +134,40 @@
 						_this.remark4 = obj[0].updated_date;
 						
 						let shoppkid = obj[0].shop_pkid;
-						let empname = obj[0].emp_name;
 						let emp_pkid = obj[0].emp_pkid;
 						let emp_role_pkid = obj[0].emp_role_pkid;
 						let mi_pkid = obj[0].mi_pkid;
+						
+						
+						
+						let personImg = obj[0].remark1;//头像  
+						let emp_name = obj[0].emp_name; //姓名
+						let emp_phone = obj[0].emp_phone; //手机号
+						let idcardval = obj[0].remark2; //身份证号
+						let shop_name = obj[0].shop_name;  //店铺
+						let datepos = obj[0].updated_date; //入职日期
 						let len = obj.length;
 						
-						if(emp_role_pkid == "2"){
-							_this.shops = true;
-							_this.ifShow = false;
-						}else if(emp_role_pkid == "3" || emp_role_pkid == "员工"){
-							
+					if(emp_role_pkid == "2"){
+						_this.shops = true;
+						_this.ifShow = false;
+					}else if(emp_role_pkid == "3" || emp_role_pkid == "员工"){
+							let personinfo = {
+								personImg,
+								emp_name,
+								emp_phone,
+								idcardval,
+								shop_name,
+								datepos,
+								emp_role_pkid
+							}
 							uni.setStorageSync('shop_pkid',shoppkid);
-							uni.setStorageSync('emp_name',empname);
+							uni.setStorageSync('emp_name',emp_name);
 							uni.setStorageSync('emp_pkid',emp_pkid);
 							uni.setStorageSync('emp_role_pkid',"3");
 							uni.setStorageSync('mi_pkid',mi_pkid);	
+							//缓存个人信息
+							uni.setStorageSync('personinfo',personinfo);	
 							 setTimeout(()=>{
 								uni.switchTab({
 									url:"../homelistpage/homelistpage"
@@ -159,7 +175,6 @@
 							},10) 
 							_this.shops = true;
 							_this.ifShow = false;
-						}
 					}
 					else{
 						_this.shops = false;
@@ -182,19 +197,37 @@
 			
 			//跳到详情
 			shopInfo(e){
-				console.log("e",e)
+				console.log("e",e);
+				let _this = this;
 				let shoppkid = e.shop_pkid;
 				let empname = e.emp_name;
 				let emp_pkid = e.emp_pkid;
 				let emp_role_pkid = e.emp_role_pkid;
 				let mi_pkid = e.mi_pkid;
-				console.log("shop_pkid",shoppkid,empname);
+				
+				let personImg = e.personImg;  
+				let emp_name = e.emp_name; 
+				let emp_phone = e.emp_phone; 
+				let idcardval = e.idcardval; 
+				let shop_name = e.shop_name;  
+				let datepos = e.datepos; 
+			
+				let personinfo = {
+					personImg,
+					emp_name,
+					emp_phone,
+					idcardval,
+					shop_name,
+					datepos,
+					emp_role_pkid
+				}
+				
 				uni.setStorageSync('shop_pkid',shoppkid);
 				uni.setStorageSync('emp_name',empname);
 				uni.setStorageSync('emp_pkid',emp_pkid);
 				uni.setStorageSync('emp_role_pkid',emp_role_pkid);
 				uni.setStorageSync('mi_pkid',mi_pkid);	
-				console.log("mi_pkid1",this.mi_pkid)
+				uni.setStorageSync('personinfo',personinfo);	
 				 uni.showToast({
 					title:"加载中...",
 					icon:"loading"
@@ -213,14 +246,14 @@
 				});
 				setTimeout(()=>{
 					uni.navigateTo({
-						url:"/pagesB/shopIncrease/shopIncrease?openid="+this.openid + "&createby=" + this.createby + "&mi_pkid=" + this.mi_pkid
-						      +"&emp_name= " + this.emp_name
-						      +"&emp_sex= " + this.emp_sex
-						      +"&emp_phone=" + this.emp_phone
-						      +"&remark1=" + this.remark1
-						      +"&remark5=" + this.remark5
-						      +"&remark3=" + this.remark3
-						      +"&remark4= " + this.remark4
+						url:"/pagesB/shopIncrease/shopIncrease?openid="+_this.openid + "&createby=" + _this.createby + "&mi_pkid=" + _this.mi_pkid
+						      +"&emp_name= " + _this.emp_name
+						      +"&emp_sex= " + _this.emp_sex
+						      +"&emp_phone=" + _this.emp_phone
+						      +"&remark1=" + _this.remark1
+						      +"&remark5=" + _this.remark5
+						      +"&remark3=" + _this.remark3
+						      +"&remark4= " + _this.remark4
 					})
 				},2000)
 				

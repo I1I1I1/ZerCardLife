@@ -1,2 +1,2 @@
 <import src="./personnel_management.vue.wxml" />
-    <template is="3cf3f384" data="{{ ...$root['0'], $root }}"/>
+    <template is="76e7bbcc" data="{{ ...$root['0'], $root }}"/>

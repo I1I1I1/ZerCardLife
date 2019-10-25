@@ -476,7 +476,7 @@
 								_this.startCardTime  = year + '.' + month + '.' + date;
 								
 								uni.navigateTo({
-									url: '../kaika_success/kaika_success?oc_code='+ _this.oc_code + '&startCardTime=' + _this.startCardTime + '&remark3=' + _this.remark3,
+									url: '../../pages/kaika_success/kaika_success?oc_code='+ _this.oc_code + '&startCardTime=' + _this.startCardTime + '&remark3=' + _this.remark3,
 								});
 							}else{
 								uni.showToast({

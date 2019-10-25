@@ -1,22 +1,16 @@
 <script>
-import uniCalendar from '@/components/uni-calendar/uni-calendar.vue'
-</script>
+import uniCalendar from '@/components/uni-calendar/uni-calendar.vue';
 
-<script>
-//   var phoneZZ =  /^1(3|4|5|6|7|8|9)\d{9}$/;
-//   var idcardreg =  /^\d{6}(18|19|20)?\d{2}(0[1-9]|1[12])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i;
-//   // var idcardreg = _this.idcardreg;
-//   //         if (!idcardreg.test(_this.idcard)) {
-//   //           _this.$message({
-//   //             message: "身份证格式不正确!",
-//   //             type: 'warning'
-//   //           })
-//   //        }
-//   export default {
-//     name: 'App',
-// 
-//   }
-// var phon = "tes33"
+   export default {
+    name: 'App',
+	data(){
+		return{
+			
+		}
+	},
+	
+  } 
+
 
 </script>
 

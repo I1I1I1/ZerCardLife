@@ -192,9 +192,11 @@
 				{text:"店长",value:"2"}
 			],//职位
 			poscheck:'普通员工',
+			openid:'',
 			idnum:'',//权限账号
 			memberIntro:'',//员工简介
-			iconcheck:0//头像是否改变
+			iconcheck:0,//头像是否改变
+			shop_name:''//商店名称
 		}
 	},
 	onLoad(option) {
@@ -203,6 +205,8 @@
 		_this.emp_pkid = option.emp_pkid;
 		_this.created_by = option.mi_pkid;
 		_this.shop_pkid = option.shop_pkid;//店铺id
+		_this.shop_name = option.shop_name;
+		_this.openid = option.openid;
 		_this.username = option.username;//员工姓名
 		_this.idnum = option.posi;//权限账号
 		_this.userphone = option.number;//电话号
@@ -219,7 +223,6 @@
 		console.log(typeof option.image)
 		if(option.image == null || option.image == "0"){
 			console.log("option.image2",option.image)
-			console.log(2222222)
 			_this.image =_this.httpUrl+'file/static/uptouxiang.png';
 			console.log("_this.image1",_this.image)
 		}
@@ -252,6 +255,7 @@
 			this.textareashow = false;
 		},
 		back(){
+			this.getinfo();
 			uni.navigateBack({
 				delta:1
 			});
@@ -261,6 +265,7 @@
 			this.areatext = e.detail.value;
 		},
 		cancel(){
+			this.getinfo();
 			uni.navigateBack({
 				delta:1
 			}) 
@@ -409,6 +414,7 @@
 							})
 						}
 						setTimeout(() => {
+							_self.getinfo();
 							uni.navigateTo({
 								url:'../personnel_management/personnel_management?shop_pkid='+_self.shop_pkid
 							})
@@ -438,6 +444,8 @@
 						 remark4:_self.datepos ,//入职日期
 						 updated_by:_self.created_by, //创建人
 						 emp_pkid:_self.emp_pkid,//员工主键
+						 
+						
 					 }, 
 					header:{"Content-Type": "multipart/form-data"},
 					success:(res) => {
@@ -449,6 +457,7 @@
 							})
 						}
 						setTimeout(()=>{
+							_self.getinfo();
 							uni.navigateTo({
 								url:'../personnel_management/personnel_management?shop_pkid='+_self.shop_pkid
 							})
@@ -463,6 +472,82 @@
 			
 			}
 			
+		},
+		
+		//查看个人信息返回数据
+		getinfo(){
+			let _this = this;
+			uni.request({
+				url: _this.httpUrl+'v_employee_shopController/find.xsh?openid='+_this.openid+"&shop_pkid="+_this.shop_pkid,
+				method: 'GET',
+				//header: {'content-type': "application/x-www-form-urlencoded"},
+				data:{},
+				success(res) {
+					console.log("获取个人信息",res);
+					
+						_this.shoplists = [];
+						let obj = res.data.obj;
+						 for(let k in obj){
+							_this.shoplists.push({
+								"shop_pkid":obj[k].shop_pkid,
+								"emp_pkid":obj[k].emp_pkid,
+								"emp_role_pkid":obj[k].emp_role_pkid,
+								"shop_name":obj[k].shop_name,
+								"shop_address":obj[k].shop_address,
+								"emp_name":obj[k].emp_name,
+								"mi_pkid":obj[k].mi_pkid,
+								"emp_phone":obj[k].emp_phone,
+								"personImg":obj[k].remark1,
+								"idcardval":obj[k].remark2,
+								"datepos":obj[k].updated_date
+							})
+						} 
+						_this.createby = obj[0].mi_pkid;
+						_this.mi_pkid = obj[0].mi_pkid;
+						
+						_this.emp_name = obj[0].emp_name;
+						_this.emp_sex = obj[0].emp_sex;
+						_this.emp_phone = obj[0].emp_phone;
+						_this.remark1 = obj[0].remark1;
+						_this.remark5 = obj[0].remark2;
+						_this.remark3 = obj[0].remark3;
+						_this.remark4 = obj[0].updated_date;
+						
+						let shoppkid = obj[0].shop_pkid;
+						let emp_pkid = obj[0].emp_pkid;
+						let emp_role_pkid = obj[0].emp_role_pkid;
+						let mi_pkid = obj[0].mi_pkid;
+						
+						
+						
+						let personImg = obj[0].remark1;//头像  
+						let emp_name = obj[0].emp_name; //姓名
+						let emp_phone = obj[0].emp_phone; //手机号
+						let idcardval = obj[0].remark2; //身份证号
+						let shop_name = obj[0].shop_name;  //店铺
+						let datepos = obj[0].updated_date; //入职日期
+						let len = obj.length;
+						
+					
+							let personinfo = {
+								personImg,
+								emp_name,
+								emp_phone,
+								idcardval,
+								shop_name,
+								datepos,
+								emp_role_pkid
+							}
+						
+							//缓存个人信息
+							uni.setStorageSync('personinfo',personinfo);	
+						
+					},
+					fail(err) {
+							
+						console.log("响应失败",err);
+					}
+			});
 		}
 	}
 	

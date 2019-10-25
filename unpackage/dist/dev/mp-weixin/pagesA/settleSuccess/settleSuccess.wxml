@@ -1,2 +1,2 @@
 <import src="./settleSuccess.vue.wxml" />
-    <template is="2dcc7b16" data="{{ ...$root['0'], $root }}"/>
+    <template is="31fbae86" data="{{ ...$root['0'], $root }}"/>

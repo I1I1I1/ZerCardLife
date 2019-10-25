@@ -148,21 +148,20 @@ export default {
 					// 先获得会员信息
 					success(res) {
 						if(res.data.message == '获取失败'){
-							console.log("555555")
 							// 不是会员
-							// uni.showModal({
-							// 	title: '提示',
-							// 	content: '您并未注册会员，是否关注零卡生活注册成为会员',
-							// 	success: function (res) {
-							// 		if (res.confirm) {
-							// 			console.log('用户点击确定');
-							// 		_this.flag = true 
-							// 		
-							// 		} else if (res.cancel) {
-							// 			console.log('用户点击取消');
-							// 		}
-							// 	},
-							// 	});
+							/* uni.showModal({
+								title: '提示',
+								content: '您并未注册会员，是否关注零卡生活注册成为会员',
+								success: function (res) {
+									if (res.confirm) {
+										console.log('用户点击确定');
+									_this.flag = true; 
+									
+									} else if (res.cancel) {
+										console.log('用户点击取消');
+									}
+								},
+								}); */
 						}else if(res.data.message == '获取成功'){
 									console.log('会员信息',res)
 							let datahy = res.data.obj
@@ -199,7 +198,7 @@ export default {
 												// 失败没有，跳开卡
 												
 												uni.navigateTo({
-													url:'../../pages/kakai_dengjixuanren/kakai_dengjixuanren?mctd_give_money='+ _this.mctd_give_money 
+													url:'../../pagesB/kakai_dengjixuanren/kakai_dengjixuanren?mctd_give_money='+ _this.mctd_give_money 
 														 +  '&mct_pkid=' + _this.mct_pkid + '&mctd_name=' + _this.mctd_name 
 														 +  '&mctd_money=' + _this.mctd_money + '&name=' + _this.name 
 														 +  '&huiyuanname=' + _this.huiyuanname + '&sex=' + _this.sex 

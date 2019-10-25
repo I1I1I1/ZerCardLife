@@ -1,9 +1,737 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pages/home/home"],{
 
-/***/ "../../HBuilderProjects/zeroCardLife/components/tki-qrcode/qrcode.js":
-/*!**********************************************************************************!*\
-  !*** E:/HBuilderX/HBuilderProjects/zeroCardLife/components/tki-qrcode/qrcode.js ***!
-  \**********************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:\\Users\\Admin\\Desktop\\zeroCardLife\\components\\tki-qrcode\\tki-qrcode.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--18-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:/Users/Admin/Desktop/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+var _qrcode = _interopRequireDefault(__webpack_require__(/*! ./qrcode.js */ "C:\\Users\\Admin\\Desktop\\zeroCardLife\\components\\tki-qrcode\\qrcode.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var qrcode;var _default =
+{
+  name: "tki-qrcode",
+  props: {
+    cid: {
+      type: String,
+      default: 'tki-qrcode-canvas' },
+
+    size: {
+      type: Number,
+      default: 200 },
+
+    unit: {
+      type: String,
+      default: 'upx' },
+
+    show: {
+      type: Boolean,
+      default: true },
+
+    val: {
+      type: String,
+      default: '' },
+
+    background: {
+      type: String,
+      default: '#ffffff' },
+
+    foreground: {
+      type: String,
+      default: '#000000' },
+
+    pdground: {
+      type: String,
+      default: '#000000' },
+
+    icon: {
+      type: String,
+      default: '' },
+
+    iconSize: {
+      type: Number,
+      default: 40 },
+
+    lv: {
+      type: Number,
+      default: 3 },
+
+    onval: {
+      type: Boolean,
+      default: false },
+
+    loadMake: {
+      type: Boolean,
+      default: false },
+
+    usingComponents: {
+      type: Boolean,
+      default: true },
+
+    showLoading: {
+      type: Boolean,
+      default: true },
+
+    loadingText: {
+      type: String,
+      default: '二维码生成中' } },
+
+
+  data: function data() {
+    return {
+      result: '' };
+
+  },
+  methods: {
+    _makeCode: function _makeCode() {
+      var that = this;
+      if (!this._empty(this.val)) {
+        qrcode = new _qrcode.default({
+          context: that, // 上下文环境
+          canvasId: that.cid, // canvas-id
+          usingComponents: that.usingComponents, // 是否是自定义组件
+          showLoading: that.showLoading, // 是否显示loading
+          loadingText: that.loadingText, // loading文字
+          text: that.val, // 生成内容
+          size: that.cpSize, // 二维码大小
+          background: that.background, // 背景色
+          foreground: that.foreground, // 前景色
+          pdground: that.pdground, // 定位角点颜色
+          correctLevel: that.lv, // 容错级别
+          image: that.icon, // 二维码图标
+          imageSize: that.iconSize, // 二维码图标大小
+          cbResult: function cbResult(res) {// 生成二维码的回调
+            that._result(res);
+          } });
+
+      } else {
+        uni.showToast({
+          title: '二维码内容不能为空',
+          icon: 'none',
+          duration: 2000 });
+
+      }
+    },
+    _clearCode: function _clearCode() {
+      this._result('');
+      qrcode.clear();
+    },
+    _saveCode: function _saveCode() {
+      var that = this;
+      if (this.result != "") {
+        uni.saveImageToPhotosAlbum({
+          filePath: that.result,
+          success: function success() {
+            uni.showToast({
+              title: '二维码保存成功',
+              icon: 'success',
+              duration: 2000 });
+
+          } });
+
+      }
+    },
+    _result: function _result(res) {
+      this.result = res;
+      this.$emit('result', res);
+    },
+    _empty: function _empty(v) {
+      var tp = typeof v,
+      rt = false;
+      if (tp == "number" && String(v) == "") {
+        rt = true;
+      } else if (tp == "undefined") {
+        rt = true;
+      } else if (tp == "object") {
+        if (JSON.stringify(v) == "{}" || JSON.stringify(v) == "[]" || v == null) rt = true;
+      } else if (tp == "string") {
+        if (v == "" || v == "undefined" || v == "null" || v == "{}" || v == "[]") rt = true;
+      } else if (tp == "function") {
+        rt = false;
+      }
+      return rt;
+    } },
+
+  watch: {
+    size: function size(n, o) {var _this = this;
+      if (n != o && !this._empty(n)) {
+        this.cSize = n;
+        if (!this._empty(this.val)) {
+          setTimeout(function () {
+            _this._makeCode();
+          }, 100);
+        }
+      }
+    },
+    val: function val(n, o) {var _this2 = this;
+      if (this.onval) {
+        if (n != o && !this._empty(n)) {
+          setTimeout(function () {
+            _this2._makeCode();
+          }, 0);
+        }
+      }
+    } },
+
+  computed: {
+    cpSize: function cpSize() {
+      if (this.unit == "upx") {
+        return uni.upx2px(this.size);
+      } else {
+        return this.size;
+      }
+    } },
+
+  mounted: function mounted() {var _this3 = this;
+    if (this.loadMake) {
+      if (!this._empty(this.val)) {
+        setTimeout(function () {
+          _this3._makeCode();
+        }, 0);
+      }
+    }
+  } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:\\Users\\Admin\\Desktop\\zeroCardLife\\pages\\home\\home.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--18-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:/Users/Admin/Desktop/zeroCardLife/pages/home/home.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _uniSwipeAction = _interopRequireDefault(__webpack_require__(/*! @/components/uni-swipe-action/uni-swipe-action.vue */ "C:\\Users\\Admin\\Desktop\\zeroCardLife\\components\\uni-swipe-action\\uni-swipe-action.vue"));
+var _tkiQrcode = _interopRequireDefault(__webpack_require__(/*! @/components/tki-qrcode/tki-qrcode.vue */ "C:\\Users\\Admin\\Desktop\\zeroCardLife\\components\\tki-qrcode\\tki-qrcode.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _self;var _default =
+{
+  components: {
+    uniSwipeAction: _uniSwipeAction.default,
+    tkiQrcode: _tkiQrcode.default },
+
+  data: function data() {
+    return {
+      shops: false,
+      shop_pkid: "",
+      shoplists: [],
+      openid: "",
+      fanhuiIcon: '', //返回图片
+      shopIcon: '', //店铺图片
+      rightDirIcon: '', //向右指向图片
+      createby: '', //创建人
+      mi_pkid: '', //会员id
+
+      ifShow: false,
+      val: '二维码', // 要生成的二维码值
+      size: 300, // 二维码大小
+      unit: 'upx', // 单位
+      background: '#000', // 背景色
+      //foreground: '#309286', // 前景色
+      foreground: "#fff",
+      pdground: '#32dbc6', // 角标色
+      icon: '', // 二维码图标
+      iconsize: 800, // 二维码图标大小
+      lv: 3, // 二维码容错级别 ， 一般不用设置，默认就行
+      onval: true, // val值变化时自动重新生成二维码
+      loadMake: true, // 组件加载完成后自动生成二维码
+      src: '', // 二维码生成后的图片地址或base64,
+      webviewStyles: {
+        progress: {
+          color: '#FF3333' } } };
+
+
+
+  },
+  onLoad: function onLoad(e) {
+    var _this = this;
+    _this.openid = e.openid;
+    _this.val = e.openid;
+    console.log("new_openid", _this.openid);
+    _this.fanhuiIcon = _this.httpUrl + 'file/static/order/jiehznag-icon-fanhui.png';
+    _this.shopIcon = _this.httpUrl + 'file/static/home/shopIcon.png';
+    _this.rightDirIcon = _this.httpUrl + 'file/static/home/rightDir.png';
+
+    uni.request({
+      url: _this.httpUrl + 'v_employee_shopController/find.xsh?openid=' + _this.openid,
+      method: 'GET',
+      //header: {'content-type': "application/x-www-form-urlencoded"},
+      data: {},
+      success: function success(res) {
+        console.log("获取店铺信息", res);
+
+        _this.shoplists = [];
+        var obj = res.data.obj;
+        for (var k in obj) {
+          _this.shoplists.push({
+            "shop_pkid": obj[k].shop_pkid,
+            "emp_pkid": obj[k].emp_pkid,
+            "emp_role_pkid": obj[k].emp_role_pkid,
+            "shop_name": obj[k].shop_name,
+            "shop_address": obj[k].shop_address,
+            "emp_name": obj[k].emp_name,
+            "mi_pkid": obj[k].mi_pkid,
+            "emp_phone": obj[k].emp_phone,
+            "personImg": obj[k].remark1,
+            "idcardval": obj[k].remark2,
+            "datepos": obj[k].updated_date });
+
+        }
+        _this.createby = obj[0].mi_pkid;
+        _this.mi_pkid = obj[0].mi_pkid;
+
+        _this.emp_name = obj[0].emp_name;
+        _this.emp_sex = obj[0].emp_sex;
+        _this.emp_phone = obj[0].emp_phone;
+        _this.remark1 = obj[0].remark1;
+        _this.remark5 = obj[0].remark2;
+        _this.remark3 = obj[0].remark3;
+        _this.remark4 = obj[0].updated_date;
+
+        var shoppkid = obj[0].shop_pkid;
+        var emp_pkid = obj[0].emp_pkid;
+        var emp_role_pkid = obj[0].emp_role_pkid;
+        var mi_pkid = obj[0].mi_pkid;
+
+
+
+        var personImg = obj[0].remark1; //头像  
+        var emp_name = obj[0].emp_name; //姓名
+        var emp_phone = obj[0].emp_phone; //手机号
+        var idcardval = obj[0].remark2; //身份证号
+        var shop_name = obj[0].shop_name; //店铺
+        var datepos = obj[0].updated_date; //入职日期
+        var len = obj.length;
+
+        if (emp_role_pkid == "2") {
+          _this.shops = true;
+          _this.ifShow = false;
+        } else if (emp_role_pkid == "3" || emp_role_pkid == "员工") {
+          var personinfo = {
+            personImg: personImg,
+            emp_name: emp_name,
+            emp_phone: emp_phone,
+            idcardval: idcardval,
+            shop_name: shop_name,
+            datepos: datepos,
+            emp_role_pkid: emp_role_pkid };
+
+          uni.setStorageSync('shop_pkid', shoppkid);
+          uni.setStorageSync('emp_name', emp_name);
+          uni.setStorageSync('emp_pkid', emp_pkid);
+          uni.setStorageSync('emp_role_pkid', "3");
+          uni.setStorageSync('mi_pkid', mi_pkid);
+          //缓存个人信息
+          uni.setStorageSync('personinfo', personinfo);
+          setTimeout(function () {
+            uni.switchTab({
+              url: "../homelistpage/homelistpage" });
+
+          }, 10);
+          _this.shops = true;
+          _this.ifShow = false;
+        } else
+        {
+          _this.shops = false;
+          _this.ifShow = true;
+        }
+
+      },
+      fail: function fail(err) {
+
+        console.log("响应失败", err);
+      } });
+
+  },
+  methods: {
+    back: function back() {
+      uni.navigateBack({
+        delta: 1 });
+
+    },
+
+    //跳到详情
+    shopInfo: function shopInfo(e) {
+      console.log("e", e);
+      var _this = this;
+      var shoppkid = e.shop_pkid;
+      var empname = e.emp_name;
+      var emp_pkid = e.emp_pkid;
+      var emp_role_pkid = e.emp_role_pkid;
+      var mi_pkid = e.mi_pkid;
+
+      var personImg = e.personImg;
+      var emp_name = e.emp_name;
+      var emp_phone = e.emp_phone;
+      var idcardval = e.idcardval;
+      var shop_name = e.shop_name;
+      var datepos = e.datepos;
+
+      var personinfo = {
+        personImg: personImg,
+        emp_name: emp_name,
+        emp_phone: emp_phone,
+        idcardval: idcardval,
+        shop_name: shop_name,
+        datepos: datepos,
+        emp_role_pkid: emp_role_pkid };
+
+
+      uni.setStorageSync('shop_pkid', shoppkid);
+      uni.setStorageSync('emp_name', empname);
+      uni.setStorageSync('emp_pkid', emp_pkid);
+      uni.setStorageSync('emp_role_pkid', emp_role_pkid);
+      uni.setStorageSync('mi_pkid', mi_pkid);
+      uni.setStorageSync('personinfo', personinfo);
+      uni.showToast({
+        title: "加载中...",
+        icon: "loading" });
+
+      setTimeout(function () {
+        uni.switchTab({
+          url: "../homelistpage/homelistpage" });
+
+      }, 2000);
+    },
+    //新增店铺页面
+    newShop: function newShop() {
+      uni.showToast({
+        title: "加载中...",
+        icon: "loading" });
+
+      setTimeout(function () {
+        uni.navigateTo({
+          url: "/pagesB/shopIncrease/shopIncrease?openid=" + _this.openid + "&createby=" + _this.createby + "&mi_pkid=" + _this.mi_pkid +
+          "&emp_name= " + _this.emp_name +
+          "&emp_sex= " + _this.emp_sex +
+          "&emp_phone=" + _this.emp_phone +
+          "&remark1=" + _this.remark1 +
+          "&remark5=" + _this.remark5 +
+          "&remark3=" + _this.remark3 +
+          "&remark4= " + _this.remark4 });
+
+      }, 2000);
+
+    },
+
+
+    creatQrcode: function creatQrcode() {//生成二维码
+      this.$refs.qrcode._makeCode();
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
+
+/***/ }),
+
+/***/ "./node_modules/mini-css-extract-plugin/dist/loader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:\\Users\\Admin\\Desktop\\zeroCardLife\\components\\tki-qrcode\\tki-qrcode.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-1!./node_modules/css-loader??ref--6-oneOf-1-2!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:/Users/Admin/Desktop/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./node_modules/mini-css-extract-plugin/dist/loader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:\\Users\\Admin\\Desktop\\zeroCardLife\\pages\\home\\home.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-1!./node_modules/css-loader??ref--6-oneOf-1-2!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:/Users/Admin/Desktop/zeroCardLife/pages/home/home.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:\\Users\\Admin\\Desktop\\zeroCardLife\\components\\tki-qrcode\\tki-qrcode.vue?vue&type=template&id=0bec6f4d&xlang=wxml&minapp=mpvue&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:/Users/Admin/Desktop/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=template&id=0bec6f4d&xlang=wxml&minapp=mpvue& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("view", { staticClass: "tki-qrcode" }, [
+    _c("canvas", {
+      staticClass: "tki-qrcode-canvas",
+      style: { width: _vm.cpSize + "px", height: _vm.cpSize + "px" },
+      attrs: { "canvas-id": _vm.cid }
+    }),
+    _c("image", {
+      directives: [
+        { name: "show", rawName: "v-show", value: _vm.show, expression: "show" }
+      ],
+      style: { width: _vm.cpSize + "px", height: _vm.cpSize + "px" },
+      attrs: { src: _vm.result }
+    })
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:\\Users\\Admin\\Desktop\\zeroCardLife\\pages\\home\\home.vue?vue&type=template&id=182a53c6&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:/Users/Admin/Desktop/zeroCardLife/pages/home/home.vue?vue&type=template&id=182a53c6& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("view", { staticStyle: { height: "100%" } }, [
+    _c(
+      "view",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.ifShow,
+            expression: "ifShow"
+          }
+        ],
+        staticClass: "container"
+      },
+      [
+        _c("view", { staticClass: "nav" }, [
+          _c(
+            "view",
+            {
+              staticClass: "nav-list",
+              attrs: { eventid: "39603e16-0" },
+              on: { click: _vm.back }
+            },
+            [
+              _c("image", {
+                staticClass: "backicon",
+                attrs: { src: _vm.fanhuiIcon, mode: "" }
+              })
+            ]
+          ),
+          _c("view", { staticClass: "nav-list", attrs: { id: "life0" } }, [
+            _vm._v("选择店铺")
+          ]),
+          _c("view", { staticClass: "nav-list" })
+        ]),
+        _c("view", { staticClass: "qrimg" }, [
+          _c(
+            "view",
+            { staticClass: "qrimg-i" },
+            [
+              _vm.ifShow
+                ? _c("tki-qrcode", {
+                    ref: "qrcode",
+                    attrs: {
+                      cid: "qrcode1",
+                      val: _vm.val,
+                      size: _vm.size,
+                      unit: _vm.unit,
+                      background: _vm.background,
+                      foreground: _vm.foreground,
+                      pdground: _vm.pdground,
+                      icon: _vm.icon,
+                      iconSize: _vm.iconsize,
+                      lv: _vm.lv,
+                      onval: _vm.onval,
+                      loadMake: _vm.loadMake,
+                      usingComponents: true,
+                      eventid: "39603e16-1",
+                      mpcomid: "39603e16-0"
+                    },
+                    on: { result: _vm.qrR }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ])
+      ]
+    ),
+    _c(
+      "view",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.shops,
+            expression: "shops"
+          }
+        ],
+        staticClass: "order"
+      },
+      [
+        _c("view", { staticClass: "nav" }, [
+          _c(
+            "view",
+            {
+              staticClass: "nav-list",
+              attrs: { eventid: "39603e16-2" },
+              on: { click: _vm.back }
+            },
+            [
+              _c("image", {
+                staticClass: "backicon",
+                attrs: { src: _vm.fanhuiIcon, mode: "" }
+              })
+            ]
+          ),
+          _c("view", { staticClass: "nav-list", attrs: { id: "life0" } }, [
+            _vm._v("选择店铺")
+          ]),
+          _c("view", { staticClass: "nav-list" })
+        ]),
+        _c(
+          "view",
+          { staticClass: "contentlist" },
+          _vm._l(_vm.shoplists, function(shoplist, index) {
+            return _c(
+              "view",
+              {
+                key: index,
+                staticClass: "orderlist",
+                attrs: { eventid: "39603e16-3-" + index },
+                on: {
+                  click: function($event) {
+                    _vm.shopInfo(shoplist)
+                  }
+                }
+              },
+              [
+                _c("view", [
+                  _c("image", {
+                    staticClass: "shopicons",
+                    attrs: { src: _vm.shopIcon }
+                  })
+                ]),
+                _c("view", { staticClass: "shopinfos" }, [
+                  _c("view", { staticClass: "shopname" }, [
+                    _c("view", [_vm._v(_vm._s(shoplist.shop_name))]),
+                    _c("view", [
+                      _c("image", {
+                        staticClass: "toRightIndex",
+                        attrs: { src: _vm.rightDirIcon, mode: "" }
+                      })
+                    ])
+                  ]),
+                  _c("view", { staticClass: "dress" }, [
+                    _vm._v(_vm._s(shoplist.shop_address))
+                  ])
+                ])
+              ]
+            )
+          })
+        ),
+        _c(
+          "view",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.shops,
+                expression: "shops"
+              }
+            ],
+            staticClass: "foot",
+            attrs: { eventid: "39603e16-4" },
+            on: { click: _vm.newShop }
+          },
+          [_c("button", { staticClass: "btn" }, [_vm._v("新增店铺")])],
+          1
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "C:\\Users\\Admin\\Desktop\\zeroCardLife\\components\\tki-qrcode\\qrcode.js":
+/*!***************************************************************************!*\
+  !*** C:/Users/Admin/Desktop/zeroCardLife/components/tki-qrcode/qrcode.js ***!
+  \***************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1218,20 +1946,20 @@ QRCode;exports.default = _default;
 
 /***/ }),
 
-/***/ "../../HBuilderProjects/zeroCardLife/components/tki-qrcode/tki-qrcode.vue":
-/*!***************************************************************************************!*\
-  !*** E:/HBuilderX/HBuilderProjects/zeroCardLife/components/tki-qrcode/tki-qrcode.vue ***!
-  \***************************************************************************************/
+/***/ "C:\\Users\\Admin\\Desktop\\zeroCardLife\\components\\tki-qrcode\\tki-qrcode.vue":
+/*!********************************************************************************!*\
+  !*** C:/Users/Admin/Desktop/zeroCardLife/components/tki-qrcode/tki-qrcode.vue ***!
+  \********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _tki_qrcode_vue_vue_type_template_id_321a57c6_xlang_wxml_minapp_mpvue___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tki-qrcode.vue?vue&type=template&id=321a57c6&xlang=wxml&minapp=mpvue& */ "../../HBuilderProjects/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=template&id=321a57c6&xlang=wxml&minapp=mpvue&");
-/* harmony import */ var _tki_qrcode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tki-qrcode.vue?vue&type=script&lang=js& */ "../../HBuilderProjects/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=script&lang=js&");
+/* harmony import */ var _tki_qrcode_vue_vue_type_template_id_0bec6f4d_xlang_wxml_minapp_mpvue___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tki-qrcode.vue?vue&type=template&id=0bec6f4d&xlang=wxml&minapp=mpvue& */ "C:\\Users\\Admin\\Desktop\\zeroCardLife\\components\\tki-qrcode\\tki-qrcode.vue?vue&type=template&id=0bec6f4d&xlang=wxml&minapp=mpvue&");
+/* harmony import */ var _tki_qrcode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tki-qrcode.vue?vue&type=script&lang=js& */ "C:\\Users\\Admin\\Desktop\\zeroCardLife\\components\\tki-qrcode\\tki-qrcode.vue?vue&type=script&lang=js&");
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _tki_qrcode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _tki_qrcode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _tki_qrcode_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tki-qrcode.vue?vue&type=style&index=0&lang=css& */ "../../HBuilderProjects/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../plugins/uniapp-cli/node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _tki_qrcode_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tki-qrcode.vue?vue&type=style&index=0&lang=css& */ "C:\\Users\\Admin\\Desktop\\zeroCardLife\\components\\tki-qrcode\\tki-qrcode.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -1240,10 +1968,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _tki_qrcode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _tki_qrcode_vue_vue_type_template_id_321a57c6_xlang_wxml_minapp_mpvue___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _tki_qrcode_vue_vue_type_template_id_321a57c6_xlang_wxml_minapp_mpvue___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _tki_qrcode_vue_vue_type_template_id_0bec6f4d_xlang_wxml_minapp_mpvue___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _tki_qrcode_vue_vue_type_template_id_0bec6f4d_xlang_wxml_minapp_mpvue___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -1253,90 +1981,90 @@ var component = Object(_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_c
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "HBuilderProjects/zeroCardLife/components/tki-qrcode/tki-qrcode.vue"
+component.options.__file = "C:/Users/Admin/Desktop/zeroCardLife/components/tki-qrcode/tki-qrcode.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "../../HBuilderProjects/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************!*\
-  !*** E:/HBuilderX/HBuilderProjects/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************/
+/***/ "C:\\Users\\Admin\\Desktop\\zeroCardLife\\components\\tki-qrcode\\tki-qrcode.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************!*\
+  !*** C:/Users/Admin/Desktop/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../plugins/uniapp-cli/node_modules/babel-loader/lib!../../../../plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!../../../../plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--18-0!../../../../plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!../../../../plugins/uniapp-cli/node_modules/vue-loader/lib??vue-loader-options!../../../../plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!./tki-qrcode.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!../../HBuilderProjects/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=script&lang=js&");
-/* harmony import */ var _plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _E_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--18-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!./tki-qrcode.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:\\Users\\Admin\\Desktop\\zeroCardLife\\components\\tki-qrcode\\tki-qrcode.vue?vue&type=script&lang=js&");
+/* harmony import */ var _E_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_E_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _E_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _E_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_E_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "../../HBuilderProjects/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=style&index=0&lang=css&":
-/*!************************************************************************************************************************!*\
-  !*** E:/HBuilderX/HBuilderProjects/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=style&index=0&lang=css& ***!
-  \************************************************************************************************************************/
+/***/ "C:\\Users\\Admin\\Desktop\\zeroCardLife\\components\\tki-qrcode\\tki-qrcode.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************************************!*\
+  !*** C:/Users/Admin/Desktop/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../plugins/uniapp-cli/node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!../../../../plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-1!../../../../plugins/uniapp-cli/node_modules/css-loader??ref--6-oneOf-1-2!../../../../plugins/uniapp-cli/node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../plugins/uniapp-cli/node_modules/postcss-loader/src??ref--6-oneOf-1-3!../../../../plugins/uniapp-cli/node_modules/vue-loader/lib??vue-loader-options!../../../../plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!./tki-qrcode.vue?vue&type=style&index=0&lang=css& */ "./node_modules/mini-css-extract-plugin/dist/loader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!../../HBuilderProjects/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _E_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_E_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_E_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-1!./node_modules/css-loader??ref--6-oneOf-1-2!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!./tki-qrcode.vue?vue&type=style&index=0&lang=css& */ "./node_modules/mini-css-extract-plugin/dist/loader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:\\Users\\Admin\\Desktop\\zeroCardLife\\components\\tki-qrcode\\tki-qrcode.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _E_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_E_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_E_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_E_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_E_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_E_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _E_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_E_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_E_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _E_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_E_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_E_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_E_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_E_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_E_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "../../HBuilderProjects/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=template&id=321a57c6&xlang=wxml&minapp=mpvue&":
-/*!**********************************************************************************************************************************************!*\
-  !*** E:/HBuilderX/HBuilderProjects/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=template&id=321a57c6&xlang=wxml&minapp=mpvue& ***!
-  \**********************************************************************************************************************************************/
+/***/ "C:\\Users\\Admin\\Desktop\\zeroCardLife\\components\\tki-qrcode\\tki-qrcode.vue?vue&type=template&id=0bec6f4d&xlang=wxml&minapp=mpvue&":
+/*!***************************************************************************************************************************************!*\
+  !*** C:/Users/Admin/Desktop/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=template&id=0bec6f4d&xlang=wxml&minapp=mpvue& ***!
+  \***************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_template_id_321a57c6_xlang_wxml_minapp_mpvue___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../plugins/uniapp-cli/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!../../../../plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!../../../../plugins/uniapp-cli/node_modules/vue-loader/lib??vue-loader-options!../../../../plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!./tki-qrcode.vue?vue&type=template&id=321a57c6&xlang=wxml&minapp=mpvue& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!../../HBuilderProjects/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=template&id=321a57c6&xlang=wxml&minapp=mpvue&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_template_id_321a57c6_xlang_wxml_minapp_mpvue___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_template_id_0bec6f4d_xlang_wxml_minapp_mpvue___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!./tki-qrcode.vue?vue&type=template&id=0bec6f4d&xlang=wxml&minapp=mpvue& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:\\Users\\Admin\\Desktop\\zeroCardLife\\components\\tki-qrcode\\tki-qrcode.vue?vue&type=template&id=0bec6f4d&xlang=wxml&minapp=mpvue&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_template_id_0bec6f4d_xlang_wxml_minapp_mpvue___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_template_id_321a57c6_xlang_wxml_minapp_mpvue___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_tki_qrcode_vue_vue_type_template_id_0bec6f4d_xlang_wxml_minapp_mpvue___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ }),
 
-/***/ "../../HBuilderProjects/zeroCardLife/main.js?{\"page\":\"pages%2Fhome%2Fhome\"}":
-/*!*****************************************************************************************!*\
-  !*** E:/HBuilderX/HBuilderProjects/zeroCardLife/main.js?{"page":"pages%2Fhome%2Fhome"} ***!
-  \*****************************************************************************************/
+/***/ "C:\\Users\\Admin\\Desktop\\zeroCardLife\\main.js?{\"page\":\"pages%2Fhome%2Fhome\"}":
+/*!**********************************************************************************!*\
+  !*** C:/Users/Admin/Desktop/zeroCardLife/main.js?{"page":"pages%2Fhome%2Fhome"} ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__(/*! uni-pages */ "../../HBuilderProjects/zeroCardLife/pages.json");
+__webpack_require__(/*! uni-pages */ "C:\\Users\\Admin\\Desktop\\zeroCardLife\\pages.json");
 var _mpvuePageFactory = _interopRequireDefault(__webpack_require__(/*! mpvue-page-factory */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mpvue-page-factory/index.js"));
-var _home = _interopRequireDefault(__webpack_require__(/*! ./pages/home/home.vue */ "../../HBuilderProjects/zeroCardLife/pages/home/home.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _home = _interopRequireDefault(__webpack_require__(/*! ./pages/home/home.vue */ "C:\\Users\\Admin\\Desktop\\zeroCardLife\\pages\\home\\home.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 Page((0, _mpvuePageFactory.default)(_home.default));
 
 /***/ }),
 
-/***/ "../../HBuilderProjects/zeroCardLife/pages/home/home.vue":
-/*!**********************************************************************!*\
-  !*** E:/HBuilderX/HBuilderProjects/zeroCardLife/pages/home/home.vue ***!
-  \**********************************************************************/
+/***/ "C:\\Users\\Admin\\Desktop\\zeroCardLife\\pages\\home\\home.vue":
+/*!***************************************************************!*\
+  !*** C:/Users/Admin/Desktop/zeroCardLife/pages/home/home.vue ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _home_vue_vue_type_template_id_2da4f74d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./home.vue?vue&type=template&id=2da4f74d& */ "../../HBuilderProjects/zeroCardLife/pages/home/home.vue?vue&type=template&id=2da4f74d&");
-/* harmony import */ var _home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home.vue?vue&type=script&lang=js& */ "../../HBuilderProjects/zeroCardLife/pages/home/home.vue?vue&type=script&lang=js&");
+/* harmony import */ var _home_vue_vue_type_template_id_182a53c6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./home.vue?vue&type=template&id=182a53c6& */ "C:\\Users\\Admin\\Desktop\\zeroCardLife\\pages\\home\\home.vue?vue&type=template&id=182a53c6&");
+/* harmony import */ var _home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home.vue?vue&type=script&lang=js& */ "C:\\Users\\Admin\\Desktop\\zeroCardLife\\pages\\home\\home.vue?vue&type=script&lang=js&");
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home.vue?vue&type=style&index=0&lang=css& */ "../../HBuilderProjects/zeroCardLife/pages/home/home.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../plugins/uniapp-cli/node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home.vue?vue&type=style&index=0&lang=css& */ "C:\\Users\\Admin\\Desktop\\zeroCardLife\\pages\\home\\home.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -1345,10 +2073,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _home_vue_vue_type_template_id_2da4f74d___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _home_vue_vue_type_template_id_2da4f74d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _home_vue_vue_type_template_id_182a53c6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _home_vue_vue_type_template_id_182a53c6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -1358,755 +2086,60 @@ var component = Object(_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_c
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "HBuilderProjects/zeroCardLife/pages/home/home.vue"
+component.options.__file = "C:/Users/Admin/Desktop/zeroCardLife/pages/home/home.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "../../HBuilderProjects/zeroCardLife/pages/home/home.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************!*\
-  !*** E:/HBuilderX/HBuilderProjects/zeroCardLife/pages/home/home.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************/
+/***/ "C:\\Users\\Admin\\Desktop\\zeroCardLife\\pages\\home\\home.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** C:/Users/Admin/Desktop/zeroCardLife/pages/home/home.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../plugins/uniapp-cli/node_modules/babel-loader/lib!../../../../plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!../../../../plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--18-0!../../../../plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!../../../../plugins/uniapp-cli/node_modules/vue-loader/lib??vue-loader-options!../../../../plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!./home.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!../../HBuilderProjects/zeroCardLife/pages/home/home.vue?vue&type=script&lang=js&");
-/* harmony import */ var _plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _E_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--18-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!./home.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:\\Users\\Admin\\Desktop\\zeroCardLife\\pages\\home\\home.vue?vue&type=script&lang=js&");
+/* harmony import */ var _E_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_E_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _E_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _E_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_E_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "../../HBuilderProjects/zeroCardLife/pages/home/home.vue?vue&type=style&index=0&lang=css&":
-/*!*******************************************************************************************************!*\
-  !*** E:/HBuilderX/HBuilderProjects/zeroCardLife/pages/home/home.vue?vue&type=style&index=0&lang=css& ***!
-  \*******************************************************************************************************/
+/***/ "C:\\Users\\Admin\\Desktop\\zeroCardLife\\pages\\home\\home.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************************!*\
+  !*** C:/Users/Admin/Desktop/zeroCardLife/pages/home/home.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../plugins/uniapp-cli/node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!../../../../plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-1!../../../../plugins/uniapp-cli/node_modules/css-loader??ref--6-oneOf-1-2!../../../../plugins/uniapp-cli/node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../plugins/uniapp-cli/node_modules/postcss-loader/src??ref--6-oneOf-1-3!../../../../plugins/uniapp-cli/node_modules/vue-loader/lib??vue-loader-options!../../../../plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!./home.vue?vue&type=style&index=0&lang=css& */ "./node_modules/mini-css-extract-plugin/dist/loader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!../../HBuilderProjects/zeroCardLife/pages/home/home.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _E_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_E_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_E_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-1!./node_modules/css-loader??ref--6-oneOf-1-2!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!./home.vue?vue&type=style&index=0&lang=css& */ "./node_modules/mini-css-extract-plugin/dist/loader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:\\Users\\Admin\\Desktop\\zeroCardLife\\pages\\home\\home.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _E_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_E_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_E_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_E_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_E_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_E_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _E_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_E_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_E_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _E_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_E_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_E_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_E_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_E_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_E_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "../../HBuilderProjects/zeroCardLife/pages/home/home.vue?vue&type=template&id=2da4f74d&":
-/*!*****************************************************************************************************!*\
-  !*** E:/HBuilderX/HBuilderProjects/zeroCardLife/pages/home/home.vue?vue&type=template&id=2da4f74d& ***!
-  \*****************************************************************************************************/
+/***/ "C:\\Users\\Admin\\Desktop\\zeroCardLife\\pages\\home\\home.vue?vue&type=template&id=182a53c6&":
+/*!**********************************************************************************************!*\
+  !*** C:/Users/Admin/Desktop/zeroCardLife/pages/home/home.vue?vue&type=template&id=182a53c6& ***!
+  \**********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_template_id_2da4f74d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../plugins/uniapp-cli/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!../../../../plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!../../../../plugins/uniapp-cli/node_modules/vue-loader/lib??vue-loader-options!../../../../plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!./home.vue?vue&type=template&id=2da4f74d& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!../../HBuilderProjects/zeroCardLife/pages/home/home.vue?vue&type=template&id=2da4f74d&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_template_id_2da4f74d___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_template_id_182a53c6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!./home.vue?vue&type=template&id=182a53c6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:\\Users\\Admin\\Desktop\\zeroCardLife\\pages\\home\\home.vue?vue&type=template&id=182a53c6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_template_id_182a53c6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_template_id_2da4f74d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!../../HBuilderProjects/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--18-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/HBuilderX/HBuilderProjects/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-
-
-
-
-
-
-
-var _qrcode = _interopRequireDefault(__webpack_require__(/*! ./qrcode.js */ "../../HBuilderProjects/zeroCardLife/components/tki-qrcode/qrcode.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-var qrcode;var _default =
-{
-  name: "tki-qrcode",
-  props: {
-    cid: {
-      type: String,
-      default: 'tki-qrcode-canvas' },
-
-    size: {
-      type: Number,
-      default: 200 },
-
-    unit: {
-      type: String,
-      default: 'upx' },
-
-    show: {
-      type: Boolean,
-      default: true },
-
-    val: {
-      type: String,
-      default: '' },
-
-    background: {
-      type: String,
-      default: '#ffffff' },
-
-    foreground: {
-      type: String,
-      default: '#000000' },
-
-    pdground: {
-      type: String,
-      default: '#000000' },
-
-    icon: {
-      type: String,
-      default: '' },
-
-    iconSize: {
-      type: Number,
-      default: 40 },
-
-    lv: {
-      type: Number,
-      default: 3 },
-
-    onval: {
-      type: Boolean,
-      default: false },
-
-    loadMake: {
-      type: Boolean,
-      default: false },
-
-    usingComponents: {
-      type: Boolean,
-      default: true },
-
-    showLoading: {
-      type: Boolean,
-      default: true },
-
-    loadingText: {
-      type: String,
-      default: '二维码生成中' } },
-
-
-  data: function data() {
-    return {
-      result: '' };
-
-  },
-  methods: {
-    _makeCode: function _makeCode() {
-      var that = this;
-      if (!this._empty(this.val)) {
-        qrcode = new _qrcode.default({
-          context: that, // 上下文环境
-          canvasId: that.cid, // canvas-id
-          usingComponents: that.usingComponents, // 是否是自定义组件
-          showLoading: that.showLoading, // 是否显示loading
-          loadingText: that.loadingText, // loading文字
-          text: that.val, // 生成内容
-          size: that.cpSize, // 二维码大小
-          background: that.background, // 背景色
-          foreground: that.foreground, // 前景色
-          pdground: that.pdground, // 定位角点颜色
-          correctLevel: that.lv, // 容错级别
-          image: that.icon, // 二维码图标
-          imageSize: that.iconSize, // 二维码图标大小
-          cbResult: function cbResult(res) {// 生成二维码的回调
-            that._result(res);
-          } });
-
-      } else {
-        uni.showToast({
-          title: '二维码内容不能为空',
-          icon: 'none',
-          duration: 2000 });
-
-      }
-    },
-    _clearCode: function _clearCode() {
-      this._result('');
-      qrcode.clear();
-    },
-    _saveCode: function _saveCode() {
-      var that = this;
-      if (this.result != "") {
-        uni.saveImageToPhotosAlbum({
-          filePath: that.result,
-          success: function success() {
-            uni.showToast({
-              title: '二维码保存成功',
-              icon: 'success',
-              duration: 2000 });
-
-          } });
-
-      }
-    },
-    _result: function _result(res) {
-      this.result = res;
-      this.$emit('result', res);
-    },
-    _empty: function _empty(v) {
-      var tp = typeof v,
-      rt = false;
-      if (tp == "number" && String(v) == "") {
-        rt = true;
-      } else if (tp == "undefined") {
-        rt = true;
-      } else if (tp == "object") {
-        if (JSON.stringify(v) == "{}" || JSON.stringify(v) == "[]" || v == null) rt = true;
-      } else if (tp == "string") {
-        if (v == "" || v == "undefined" || v == "null" || v == "{}" || v == "[]") rt = true;
-      } else if (tp == "function") {
-        rt = false;
-      }
-      return rt;
-    } },
-
-  watch: {
-    size: function size(n, o) {var _this = this;
-      if (n != o && !this._empty(n)) {
-        this.cSize = n;
-        if (!this._empty(this.val)) {
-          setTimeout(function () {
-            _this._makeCode();
-          }, 100);
-        }
-      }
-    },
-    val: function val(n, o) {var _this2 = this;
-      if (this.onval) {
-        if (n != o && !this._empty(n)) {
-          setTimeout(function () {
-            _this2._makeCode();
-          }, 0);
-        }
-      }
-    } },
-
-  computed: {
-    cpSize: function cpSize() {
-      if (this.unit == "upx") {
-        return uni.upx2px(this.size);
-      } else {
-        return this.size;
-      }
-    } },
-
-  mounted: function mounted() {var _this3 = this;
-    if (this.loadMake) {
-      if (!this._empty(this.val)) {
-        setTimeout(function () {
-          _this3._makeCode();
-        }, 0);
-      }
-    }
-  } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!../../HBuilderProjects/zeroCardLife/pages/home/home.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--18-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/HBuilderX/HBuilderProjects/zeroCardLife/pages/home/home.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var _uniSwipeAction = _interopRequireDefault(__webpack_require__(/*! @/components/uni-swipe-action/uni-swipe-action.vue */ "../../HBuilderProjects/zeroCardLife/components/uni-swipe-action/uni-swipe-action.vue"));
-var _tkiQrcode = _interopRequireDefault(__webpack_require__(/*! @/components/tki-qrcode/tki-qrcode.vue */ "../../HBuilderProjects/zeroCardLife/components/tki-qrcode/tki-qrcode.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-var _self;var _default =
-{
-  components: {
-    uniSwipeAction: _uniSwipeAction.default,
-    tkiQrcode: _tkiQrcode.default },
-
-  data: function data() {
-    return {
-      shops: false,
-      shop_pkid: "",
-      shoplists: [],
-      openid: "",
-      fanhuiIcon: '', //返回图片
-      shopIcon: '', //店铺图片
-      rightDirIcon: '', //向右指向图片
-      createby: '', //创建人
-      mi_pkid: '', //会员id
-
-      ifShow: false,
-      val: '二维码', // 要生成的二维码值
-      size: 300, // 二维码大小
-      unit: 'upx', // 单位
-      background: '#000', // 背景色
-      //foreground: '#309286', // 前景色
-      foreground: "#fff",
-      pdground: '#32dbc6', // 角标色
-      icon: '', // 二维码图标
-      iconsize: 800, // 二维码图标大小
-      lv: 3, // 二维码容错级别 ， 一般不用设置，默认就行
-      onval: true, // val值变化时自动重新生成二维码
-      loadMake: true, // 组件加载完成后自动生成二维码
-      src: '', // 二维码生成后的图片地址或base64,
-      webviewStyles: {
-        progress: {
-          color: '#FF3333' } } };
-
-
-
-  },
-  onLoad: function onLoad() {
-
-    var openidStorage = uni.getStorageSync('openid');
-    console.log("home_openid", openidStorage);
-
-    if (openidStorage) {
-      this.val = openidStorage;
-    }
-    var _this = this;
-    _this.openid = openidStorage;
-    _this.fanhuiIcon = _this.httpUrl + 'file/static/order/jiehznag-icon-fanhui.png';
-    _this.shopIcon = _this.httpUrl + 'file/static/home/shopIcon.png';
-    _this.rightDirIcon = _this.httpUrl + 'file/static/home/rightDir.png';
-
-    uni.request({
-      url: _this.httpUrl + 'v_employee_shopController/find.xsh?openid=' + openidStorage,
-      method: 'GET',
-      //header: {'content-type': "application/x-www-form-urlencoded"},
-      data: {},
-      success: function success(res) {
-        console.log("获取店铺信息", res);
-        if (res.data.message == "获取成功") {
-
-          _this.shoplists = [];
-          var obj = res.data.obj;
-          for (var k in obj) {
-            _this.shoplists.push({
-              "shop_pkid": obj[k].shop_pkid,
-              "emp_pkid": obj[k].emp_pkid,
-              "emp_role_pkid": obj[k].emp_role_pkid,
-              "shop_name": obj[k].shop_name,
-              "shop_address": obj[k].shop_address,
-              "emp_name": obj[k].emp_name,
-              "mi_pkid": obj[k].mi_pkid });
-
-          }
-          _this.createby = obj[0].mi_pkid;
-          _this.mi_pkid = obj[0].mi_pkid;
-
-          _this.emp_name = obj[0].emp_name;
-          _this.emp_sex = obj[0].emp_sex;
-          _this.emp_phone = obj[0].emp_phone;
-          _this.remark1 = obj[0].remark1;
-          _this.remark5 = obj[0].remark2;
-          _this.remark3 = obj[0].remark3;
-          _this.remark4 = obj[0].updated_date;
-
-          var shoppkid = obj[0].shop_pkid;
-          var empname = obj[0].emp_name;
-          var emp_pkid = obj[0].emp_pkid;
-          var emp_role_pkid = obj[0].emp_role_pkid;
-          var mi_pkid = obj[0].mi_pkid;
-          var len = obj.length;
-
-          if (emp_role_pkid == "2") {
-            _this.shops = true;
-            _this.ifShow = false;
-          } else if (emp_role_pkid == "3" || emp_role_pkid == "员工") {
-
-            uni.setStorageSync('shop_pkid', shoppkid);
-            uni.setStorageSync('emp_name', empname);
-            uni.setStorageSync('emp_pkid', emp_pkid);
-            uni.setStorageSync('emp_role_pkid', "3");
-            uni.setStorageSync('mi_pkid', mi_pkid);
-            setTimeout(function () {
-              uni.switchTab({
-                url: "../homelistpage/homelistpage" });
-
-            }, 10);
-            _this.shops = true;
-            _this.ifShow = false;
-          }
-        } else
-        {
-          _this.shops = false;
-          _this.ifShow = true;
-        }
-
-      },
-      fail: function fail(err) {
-
-        console.log("响应失败", err);
-      } });
-
-  },
-  methods: {
-    back: function back() {
-      uni.navigateBack({
-        delta: 1 });
-
-    },
-
-    //跳到详情
-    shopInfo: function shopInfo(e) {
-      console.log("e", e);
-      var shoppkid = e.shop_pkid;
-      var empname = e.emp_name;
-      var emp_pkid = e.emp_pkid;
-      var emp_role_pkid = e.emp_role_pkid;
-      var mi_pkid = e.mi_pkid;
-      console.log("shop_pkid", shoppkid, empname);
-      uni.setStorageSync('shop_pkid', shoppkid);
-      uni.setStorageSync('emp_name', empname);
-      uni.setStorageSync('emp_pkid', emp_pkid);
-      uni.setStorageSync('emp_role_pkid', emp_role_pkid);
-      uni.setStorageSync('mi_pkid', mi_pkid);
-      console.log("mi_pkid1", this.mi_pkid);
-      uni.showToast({
-        title: "加载中...",
-        icon: "loading" });
-
-      setTimeout(function () {
-        uni.switchTab({
-          url: "../homelistpage/homelistpage" });
-
-      }, 2000);
-    },
-    //新增店铺页面
-    newShop: function newShop() {var _this2 = this;
-      uni.showToast({
-        title: "加载中...",
-        icon: "loading" });
-
-      setTimeout(function () {
-        uni.navigateTo({
-          url: "/pagesB/shopIncrease/shopIncrease?openid=" + _this2.openid + "&createby=" + _this2.createby + "&mi_pkid=" + _this2.mi_pkid +
-          "&emp_name= " + _this2.emp_name +
-          "&emp_sex= " + _this2.emp_sex +
-          "&emp_phone=" + _this2.emp_phone +
-          "&remark1=" + _this2.remark1 +
-          "&remark5=" + _this2.remark5 +
-          "&remark3=" + _this2.remark3 +
-          "&remark4= " + _this2.remark4 });
-
-      }, 2000);
-
-    },
-
-
-    creatQrcode: function creatQrcode() {//生成二维码
-      this.$refs.qrcode._makeCode();
-    } } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
-
-/***/ }),
-
-/***/ "./node_modules/mini-css-extract-plugin/dist/loader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!../../HBuilderProjects/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=style&index=0&lang=css&":
-/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-1!./node_modules/css-loader??ref--6-oneOf-1-2!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/HBuilderX/HBuilderProjects/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=style&index=0&lang=css& ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ "./node_modules/mini-css-extract-plugin/dist/loader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!../../HBuilderProjects/zeroCardLife/pages/home/home.vue?vue&type=style&index=0&lang=css&":
-/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-1!./node_modules/css-loader??ref--6-oneOf-1-2!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/HBuilderX/HBuilderProjects/zeroCardLife/pages/home/home.vue?vue&type=style&index=0&lang=css& ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!../../HBuilderProjects/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=template&id=321a57c6&xlang=wxml&minapp=mpvue&":
-/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/HBuilderX/HBuilderProjects/zeroCardLife/components/tki-qrcode/tki-qrcode.vue?vue&type=template&id=321a57c6&xlang=wxml&minapp=mpvue& ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("view", { staticClass: "tki-qrcode" }, [
-    _c("canvas", {
-      staticClass: "tki-qrcode-canvas",
-      style: { width: _vm.cpSize + "px", height: _vm.cpSize + "px" },
-      attrs: { "canvas-id": _vm.cid }
-    }),
-    _c("image", {
-      directives: [
-        { name: "show", rawName: "v-show", value: _vm.show, expression: "show" }
-      ],
-      style: { width: _vm.cpSize + "px", height: _vm.cpSize + "px" },
-      attrs: { src: _vm.result }
-    })
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!../../HBuilderProjects/zeroCardLife/pages/home/home.vue?vue&type=template&id=2da4f74d&":
-/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/HBuilderX/HBuilderProjects/zeroCardLife/pages/home/home.vue?vue&type=template&id=2da4f74d& ***!
-  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("view", { staticStyle: { height: "100%" } }, [
-    _c(
-      "view",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.ifShow,
-            expression: "ifShow"
-          }
-        ],
-        staticClass: "container"
-      },
-      [
-        _c("view", { staticClass: "nav" }, [
-          _c(
-            "view",
-            {
-              staticClass: "nav-list",
-              attrs: { eventid: "25694f5e-0" },
-              on: { click: _vm.back }
-            },
-            [
-              _c("image", {
-                staticClass: "backicon",
-                attrs: { src: _vm.fanhuiIcon, mode: "" }
-              })
-            ]
-          ),
-          _c("view", { staticClass: "nav-list", attrs: { id: "life0" } }, [
-            _vm._v("选择店铺")
-          ]),
-          _c("view", { staticClass: "nav-list" })
-        ]),
-        _c("view", { staticClass: "qrimg" }, [
-          _c(
-            "view",
-            { staticClass: "qrimg-i" },
-            [
-              _vm.ifShow
-                ? _c("tki-qrcode", {
-                    ref: "qrcode",
-                    attrs: {
-                      cid: "qrcode1",
-                      val: _vm.val,
-                      size: _vm.size,
-                      unit: _vm.unit,
-                      background: _vm.background,
-                      foreground: _vm.foreground,
-                      pdground: _vm.pdground,
-                      icon: _vm.icon,
-                      iconSize: _vm.iconsize,
-                      lv: _vm.lv,
-                      onval: _vm.onval,
-                      loadMake: _vm.loadMake,
-                      usingComponents: true,
-                      eventid: "25694f5e-1",
-                      mpcomid: "25694f5e-0"
-                    },
-                    on: { result: _vm.qrR }
-                  })
-                : _vm._e()
-            ],
-            1
-          )
-        ])
-      ]
-    ),
-    _c(
-      "view",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.shops,
-            expression: "shops"
-          }
-        ],
-        staticClass: "order"
-      },
-      [
-        _c("view", { staticClass: "nav" }, [
-          _c(
-            "view",
-            {
-              staticClass: "nav-list",
-              attrs: { eventid: "25694f5e-2" },
-              on: { click: _vm.back }
-            },
-            [
-              _c("image", {
-                staticClass: "backicon",
-                attrs: { src: _vm.fanhuiIcon, mode: "" }
-              })
-            ]
-          ),
-          _c("view", { staticClass: "nav-list", attrs: { id: "life0" } }, [
-            _vm._v("选择店铺")
-          ]),
-          _c("view", { staticClass: "nav-list" })
-        ]),
-        _c(
-          "view",
-          { staticClass: "contentlist" },
-          _vm._l(_vm.shoplists, function(shoplist, index) {
-            return _c(
-              "view",
-              {
-                key: index,
-                staticClass: "orderlist",
-                attrs: { eventid: "25694f5e-3-" + index },
-                on: {
-                  click: function($event) {
-                    _vm.shopInfo(shoplist)
-                  }
-                }
-              },
-              [
-                _c("view", [
-                  _c("image", {
-                    staticClass: "shopicons",
-                    attrs: { src: _vm.shopIcon }
-                  })
-                ]),
-                _c("view", { staticClass: "shopinfos" }, [
-                  _c("view", { staticClass: "shopname" }, [
-                    _c("view", [_vm._v(_vm._s(shoplist.shop_name))]),
-                    _c("view", [
-                      _c("image", {
-                        staticClass: "toRightIndex",
-                        attrs: { src: _vm.rightDirIcon, mode: "" }
-                      })
-                    ])
-                  ]),
-                  _c("view", { staticClass: "dress" }, [
-                    _vm._v(_vm._s(shoplist.shop_address))
-                  ])
-                ])
-              ]
-            )
-          })
-        ),
-        _c(
-          "view",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.shops,
-                expression: "shops"
-              }
-            ],
-            staticClass: "foot",
-            attrs: { eventid: "25694f5e-4" },
-            on: { click: _vm.newShop }
-          },
-          [_c("button", { staticClass: "btn" }, [_vm._v("新增店铺")])],
-          1
-        )
-      ]
-    )
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_E_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_E_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_home_vue_vue_type_template_id_182a53c6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ })
 
-},[["../../HBuilderProjects/zeroCardLife/main.js?{\"page\":\"pages%2Fhome%2Fhome\"}","common/runtime","common/vendor"]]]);
+},[["C:\\Users\\Admin\\Desktop\\zeroCardLife\\main.js?{\"page\":\"pages%2Fhome%2Fhome\"}","common/runtime","common/vendor"]]]);
 //# sourceMappingURL=../../../.sourcemap/mp-weixin/pages/home/home.js.map

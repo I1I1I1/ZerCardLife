@@ -1,37 +1,28 @@
 {
 	"pages": [
-		// {
-		//     "path" : "pages/chongzhi_record/chongzhi_record",
-		//     "style" : {}
-		// },
-		// {
-		//     "path" : "pages/start_card_record/start_card_record",
-		//     "style" : {}
-		// },
-		// {
-		//     "path" : "pages/closing_record/closing_record"
-		// },
-		 // {
-		 //     "path" : "pages/member_management/member_management"
-		 // },
-		/* {
-			"path" : "pages/memberInfo/memberInfo",//登录
-			"style" : {
-				"enablePullDownRefresh": false
-			}
-		},	 */
-		{
-			"path" : "pages/index/index",//登录
-			"style" : {
-				"enablePullDownRefresh": false
-			}
-		},	
+		
 		{
 			"path" : "pages/homelistpage/homelistpage",//首页
 			"style" : {
 				"enablePullDownRefresh": false
 			}
 		},
+		
+		{
+		    "path" : "pages/me/me",//我的
+		    "style" : {
+				"enablePullDownRefresh": false
+			}
+		},
+		
+		
+		{
+			"path" : "pages/index/index",//登录
+			"style" : {
+				"enablePullDownRefresh": false
+			}
+		},	
+		
 		{
 			"path" : "pages/home/home",//店铺
 			"style" : {
@@ -51,12 +42,7 @@
             	"enablePullDownRefresh": false
             }
         },
-		{
-            "path" : "pages/me/me",//我的
-            "style" : {
-				"enablePullDownRefresh": false
-			}
-        },
+		
 		/***********宝轩************/
 		{
 			 "path" : "pages/startCard/startCard",
@@ -151,33 +137,38 @@
     "selectedColor": "#ff7500",
     "borderStyle": "black",
     "backgroundColor": "#fff",
-    "list": [{
-        "pagePath": "pages/homelistpage/homelistpage",
-        "iconPath": "static/tabbar/home-icon-sy-sel.png",
-        "selectedIconPath": "static/tabbar/home-icon-sy-sel.png",
-		"backgroundColor":"#DBF8FE",
-        "text": "首页"
-    }, 
-	{
-        "pagePath": "pages/info/info",
-        "iconPath": "static/tabbar/home-icon-xiaoxi-nor.png",
-        "selectedIconPath": "static/tabbar/home-icon-xiaoxi-nor.png",
-        "text": "消息"
-    },
-	{
-	    "pagePath": "pages/grade/grade",
-	    "iconPath": "static/tabbar/home-iconyeji-nor.png",
-	    "selectedIconPath": "static/tabbar/home-iconyeji-nor.png",
-	    "text": "业绩"
-	},
-	{
-	    "pagePath": "pages/me/me",
-	    "iconPath": "static/tabbar/home-icon-me-nor.png",
-	    "selectedIconPath": "static/tabbar/home-icon-me-nor.png",
-	    "text": "我的"
+    "list": [
+		
+			{
+				"pagePath": "pages/homelistpage/homelistpage",
+				"iconPath": "static/tabbar/home-icon-sy-sel.png",
+				"selectedIconPath": "static/tabbar/home-icon-sy-sel.png",
+				
+				"text": "首页"
+			}, 
+			
+			{
+				"pagePath": "pages/info/info",
+				
+				"iconPath": "static/tabbar/home-icon-xiaoxi-nor.png",
+				"selectedIconPath": "static/tabbar/home-icon-xiaoxi-nor.png",
+				"text": "消息"
+			},
+			{
+				"pagePath": "pages/grade/grade",
+				"iconPath": "static/tabbar/home-iconyeji-nor.png",
+				"selectedIconPath": "static/tabbar/home-iconyeji-nor.png",
+				"text": "业绩"
+			},
+			{
+				"pagePath": "pages/me/me",
+				"iconPath": "static/tabbar/home-icon-me-nor.png",
+				"selectedIconPath": "static/tabbar/home-icon-me-nor.png",
+				"backgroundColor":"#DBF8FE",
+				"text": "我的"
+			}
+		]
 	}
-	]
-}
 	
 }
 

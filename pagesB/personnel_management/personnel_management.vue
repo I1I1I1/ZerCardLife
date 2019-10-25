@@ -53,6 +53,9 @@ export default {
 			huiyuan: [
 				
 			],
+			huiyuanget: [
+				
+			],
 			shop_pkid:'',
 			openid:'',
 			keywords:'',
@@ -68,10 +71,7 @@ export default {
 		_this.shop_pkid = option.shop_pkid;
 		_this.mi_pkid =  option.mi_pkid;//uni.getStorageSync('mi_pkid');
 		_this.emp_role_pkid = uni.getStorageSync('emp_role_pkid');
-		// let arrmem = [
-		// 	{image:this.httpUrl+'file/static/uptouxiang.png',name:'张三',posi:'店长',posstate:'在职',number:'18584515611',sex:'男',idcardval:'11111',datepos:'2018-05-05',memberIntro:'我是张三'},
-		// 	{image:this.httpUrl+'file/static/uptouxiang.png',name:'王红',posi:'员工',posstate:'在职',number:'13583515621',sex:'女',idcardval:'22222',datepos:'2018-05-05',memberIntro:'我是王红'}
-		// ]
+		let shop_name =  uni.getStorageSync('personinfo').shop_name;
 		let selectEmpInfo = "";
 		
 		uni.request({
@@ -93,11 +93,11 @@ export default {
 					  for(let i=0; i < arrmem.length;i++){
 							 console.log("1a")
 							  let emp_pkid = arrmem[i].emp_pkid;
-							  let image = arrmem[i].remark1;
-							  let name = arrmem[i].emp_name;
+							  let image = arrmem[i].remark1;//头像
+							  let name = arrmem[i].emp_name;//姓名
 							  let posicheck = arrmem[i].emp_role_pkid;
 							  let posi=posicheck=="2"?'店长':'员工';
-							  let number = arrmem[i].emp_phone;
+							  let number = arrmem[i].emp_phone; //手机号
 							  if(number == null){
 								number = '未填写手机号';
 							  }
@@ -105,14 +105,18 @@ export default {
 							  let sex=sexcheck=="1"?'女':'男';
 							  let posstatecheck = arrmem[i].emp_status;
 							  let posstate=posstatecheck=="1"?'离职':'在职';
-							  let idcardval = arrmem[i].remark2;
-							  let datepos = arrmem[i].updated_date;
+							  let idcardval = arrmem[i].remark2; //身份证号
+							  let datepos = arrmem[i].updated_date; //入职日期
 							  let memberIntro = arrmem[i].remark3;
 							  let openid = arrmem[i].openid;
+							  
+							  
 							  if(posi == '店长'){
-								 _this.huiyuan.push({emp_pkid,image,name,posi,number,'color':'#F98124',sex,posstate,idcardval,datepos,memberIntro,openid});
+								 _this.huiyuan.push({emp_pkid,image,name,posi,number,'color':'#F98124',posicheck,sex,posstate,idcardval,datepos,memberIntro,openid,shop_name});
+								 _this.huiyuanget.push({emp_pkid,image,name,posi,number,'color':'#F98124',posicheck,sex,posstate,idcardval,datepos,memberIntro,openid,shop_name});
 							  }else{
-								 _this.huiyuan.push({emp_pkid,image,name,posi,number,'color':'#1E90FF',sex,posstate,idcardval,datepos,memberIntro,openid}); 
+								 _this.huiyuan.push({emp_pkid,image,name,posi,number,'color':'#1E90FF',posicheck,sex,posstate,idcardval,datepos,memberIntro,openid,shop_name}); 
+								  _this.huiyuanget.push({emp_pkid,image,name,posi,number,'color':'#1E90FF',posicheck,sex,posstate,idcardval,datepos,memberIntro,openid,shop_name}); 
 							  }
 					}
 					_this.footshow =true;
@@ -142,7 +146,9 @@ export default {
 								let idcardval = arrmem[i].remark2;
 								let datepos = arrmem[i].updated_date;
 								let memberIntro = arrmem[i].remark3;
-								_this.huiyuan.push({emp_pkid,image,name,posi,number,'color':'#1E90FF',sex,posstate,idcardval,datepos,memberIntro,openid}); 
+								_this.huiyuan.push({emp_pkid,image,name,posi,number,'color':'#1E90FF',posicheck,sex,posstate,idcardval,datepos,memberIntro,openid,shop_name}); 
+								_this.huiyuanget.push({emp_pkid,image,name,posi,number,'color':'#1E90FF',posicheck,sex,posstate,idcardval,datepos,memberIntro,openid,shop_name}); 
+								
 							 }
 							 
 						}	
@@ -200,21 +206,26 @@ export default {
 			let memberIntro = huiyuanVal.memberIntro;
 			let mi_pkid = this.mi_pkid;
 			let openid = huiyuanVal.openid;
+			let shop_name = huiyuanVal.shop_name;
+			let posicheck = huiyuanVal.posicheck;
+			
+			
+			
 			uni.showToast({
 				title:"加载中...",
 				icon:"loading"
 			});
-			if(posi=="店长"){
+			/* if(posi=="店长"){
 				posi ="2";
 			}else if(posi=="员工"){
 				posi ="3";
-			}
+			} */
 			
 			setTimeout(()=>{
 				uni.navigateTo({
 					url:"../memberInfo/memberInfo?shop_pkid="+this.shop_pkid
 					+"&username="+username
-					+"&posi="+posi
+					+"&posi="+posicheck
 					+"&number="+number
 					+"&sex="+sex
 					+"&posstate="+posstate
@@ -225,6 +236,7 @@ export default {
 					+"&emp_pkid="+ emp_pkid
 					+"&mi_pkid=" + mi_pkid
 					+"&openid="+openid
+					+"&shop_name="+shop_name
 				})
 			},2000)
 		},
@@ -232,55 +244,11 @@ export default {
 		// 所搜
 		search(selectEmpInfo){
 			let _this = this;
-			_this.huiyuan = [];
-			_this.selectEmpInfo = selectEmpInfo;
-			  uni.request({
-				 url: _this.httpUrl + 'Jni_EmployeeController/selectEmployee.xsh',
-				 method: 'POST',
-				 header:{ 'content-type':'application/x-www-form-urlencoded' },
-				 data:{
-					 shop_pkid:_this.shop_pkid,
-					 selectEmpInfo:selectEmpInfo
-				 },
-				 success(res){
-					 console.log('resssss',res)
-					let arrmem = res.data.obj;
-					console.log("_this.emp_role_pkid=",_this.emp_role_pkid)
-					
-					
-					  for(let i=0; i < arrmem.length;i++){
-							 console.log("1a")
-							  let emp_pkid = arrmem[i].emp_pkid;
-							  let image = arrmem[i].remark1;
-							  let name = arrmem[i].emp_name;
-							  let posicheck = arrmem[i].emp_role_pkid;
-							  let posi=posicheck=="2"?'店长':'员工';
-							  let number = arrmem[i].emp_phone;
-							  if(number == null){
-								number = '未填写手机号';
-							  }
-							  let sexcheck = arrmem[i].emp_sex;
-							  let sex=sexcheck=="1"?'女':'男';
-							  let posstatecheck = arrmem[i].emp_status;
-							  let posstate=posstatecheck=="1"?'离职':'在职';
-							  let idcardval = arrmem[i].remark2;
-							  let datepos = arrmem[i].updated_date;
-							  let memberIntro = arrmem[i].remark3;
-							  let openid = arrmem[i].openid;
-							  if(posi == '店长'){
-								 _this.huiyuan.push({emp_pkid,image,name,posi,number,'color':'#F98124',sex,posstate,idcardval,datepos,memberIntro,openid});
-							  }else{
-								 _this.huiyuan.push({emp_pkid,image,name,posi,number,'color':'#1E90FF',sex,posstate,idcardval,datepos,memberIntro,openid}); 
-							  }
-					}
-					
-					
-					
-										 
-				 }, 
-				 fail(err){
-					 console.log("响应失败",err)
-				 }
+			 _this.huiyuan = _this.huiyuanget.filter(Val => {
+				if(Val.name.includes(_this.selectEmpInfo)){
+					 _this.huiyuan.push(Val);
+					return  _this.huiyuan;
+				}
 			})
 		}
 	}

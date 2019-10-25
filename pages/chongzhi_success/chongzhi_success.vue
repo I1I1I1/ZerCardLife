@@ -124,13 +124,6 @@ export default {
 			gogogomaturity_time = gogogomaturity_time.replace(new RegExp('-','g'),".");
 			this.value = gogogomaturity_time;
 		}
-		
-		
-		
-		
-		
-		
-		
 	},
 	methods: {
 		finished(){

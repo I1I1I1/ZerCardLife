@@ -16,9 +16,9 @@ Vue.prototype.money = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
 
 Vue.prototype.weixinUrl = 'https://api.weixin.qq.com/sns/jscode2session?appid=wx14ff1851c13b404a&secret=48e67155136135d7613629bbf9e9b788&grant_type=authorization_code&js_code=';//0卡
 
-Vue.prototype.httpUrl="http://172.16.1.8:8080/ZeroCardSmall/"; // 贾帅
-// Vue.prototype.httpUrl="https://172.16.1.210:8443/ZeroCardSmall/"; // 服务器
-//Vue.prototype.httpUrl="https://61.161.186.18/ZeroCardSmall/";
+ Vue.prototype.httpUrl="http://172.16.1.8:8080/ZeroCardSmall/"; // 贾帅
+ // Vue.prototype.httpUrl="http://172.16.1.210:8080/ZeroCardSmall/"; // 服务器
+
 
 App.mpType = 'app'
 

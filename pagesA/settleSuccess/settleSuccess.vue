@@ -58,7 +58,7 @@ export default {
 			recharge_type:"",//交易方式
 			dateRes:"",//交易时间
 			balance:"",//卡余额
-			balanceShow:true,
+			balanceShow:false,
 			totalprices:0,
 			shop_pkid:"",//店铺id
 			usetype:"",
@@ -102,6 +102,14 @@ export default {
 </script>
 
 <style>
+	html,body{
+		width: 100%;
+		height: 100%;
+	}
+	*{
+		margin: 0;
+		padding: 0;
+	}
 page {
 	background-color: #ffffff;
 }
@@ -135,8 +143,14 @@ page {
 }
 .xianshi {
 	position: relative;
-	top: -60upx;
+	top: -150upx;
+	height: auto;
+	overflow-y: auto;
 }
+ ::-webkit-scrollbar{
+	  width: 0px;
+	  background-color: transparent;
+	}
 .xian {
 	background-color: #e5e5e5;
 	width: 80%;
@@ -145,6 +159,7 @@ page {
 	left: 10%;
 	top: 10upx;
 }
+
 .font-black {
 	color: #333333;
 	font-size: 35upx;

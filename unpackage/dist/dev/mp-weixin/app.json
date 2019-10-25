@@ -1,11 +1,11 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/homelistpage/homelistpage",
+    "pages/me/me",
+    "pages/index/index",
     "pages/home/home",
     "pages/info/info",
     "pages/grade/grade",
-    "pages/me/me",
     "pages/startCard/startCard",
     "pages/chongzhi_xuanka/chongzhi_xuanka1",
     "pages/chongzhi_sousuo1/chongzhi_sousuo1",
@@ -50,7 +50,6 @@
         "pagePath": "pages/homelistpage/homelistpage",
         "iconPath": "static/tabbar/home-icon-sy-sel.png",
         "selectedIconPath": "static/tabbar/home-icon-sy-sel.png",
-        "backgroundColor": "#DBF8FE",
         "text": "首页"
       },
       {
@@ -69,9 +68,10 @@
         "pagePath": "pages/me/me",
         "iconPath": "static/tabbar/home-icon-me-nor.png",
         "selectedIconPath": "static/tabbar/home-icon-me-nor.png",
+        "backgroundColor": "#DBF8FE",
         "text": "我的"
       }
     ]
   },
-  "sitemapLocation": "sitemap51.json"
+  "sitemapLocation": "sitemap95.json"
 }

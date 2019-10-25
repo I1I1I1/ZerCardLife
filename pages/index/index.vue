@@ -25,13 +25,11 @@
 				name: '',
 				face: '',
 				sign: '',
-				imgsrc:''
+				imgsrc:this.httpUrl+'file/static/loginbg/loginbg.png'
 			}
 		},
 		onLoad() {
-			let _this = this;
 			
-			_this.imgsrc = _this.httpUrl+'file/static/loginbg/loginbg.png'
 			
 		},
 		methods: {
@@ -54,14 +52,15 @@
 							title: '登录成功！'
 						}); 
 						uni.setStorageSync('openid',me.openid);
+						uni.navigateTo({
+							url:"../home/home?openid="+me.openid
+						})
 					},
 					fail(err) {
 						console.log(err)
 					}
 				});
-				 uni.navigateTo({
-					 url:"../home/home"
-				 })
+				
 			},
 			wxLogin(res1){
 				var me = this;

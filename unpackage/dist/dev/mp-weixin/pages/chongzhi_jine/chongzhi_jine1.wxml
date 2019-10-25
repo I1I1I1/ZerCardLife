@@ -1,2 +1,2 @@
 <import src="./chongzhi_jine1.vue.wxml" />
-    <template is="125616b7" data="{{ ...$root['0'], $root }}"/>
+    <template is="103e7cff" data="{{ ...$root['0'], $root }}"/>
