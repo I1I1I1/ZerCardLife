@@ -241,7 +241,7 @@ export default {
 			},2000)
 		},
 		
-		// 所搜
+		// 搜索
 		search(selectEmpInfo){
 			let _this = this;
 			 _this.huiyuan = _this.huiyuanget.filter(Val => {

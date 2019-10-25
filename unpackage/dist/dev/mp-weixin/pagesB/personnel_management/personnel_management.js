@@ -356,7 +356,7 @@ __webpack_require__.r(__webpack_exports__);
       }, 2000);
     },
 
-    // 所搜
+    // 搜索
     search: function search(selectEmpInfo) {
       var _this = this;
       _this.huiyuan = _this.huiyuanget.filter(function (Val) {
